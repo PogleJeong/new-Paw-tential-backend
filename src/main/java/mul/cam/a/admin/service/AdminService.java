@@ -1,6 +1,7 @@
 package mul.cam.a.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.cam.a.admin.dao.AdminDao;
 import mul.cam.a.admin.dto.PageParam;
-import mul.cam.a.admin.dto.QnADto;
-import mul.cam.a.admin.dto.ReportDto;
+
 import mul.cam.a.member.dto.MemberDto;
+import mul.cam.a.myfeed.dto.QnADto;
+import mul.cam.a.myfeed.dto.ReportDto;
 
 @Service
 @Transactional
@@ -56,5 +58,17 @@ public class AdminService {
 	public boolean answer(int seq) {
 		int n = dao.answer(seq);
 		return n>0?true:false;
+	}
+	
+	public List<Map<String, Object>> petChart() {
+		return dao.petChart();
+	}
+	
+	public List<Map<String, Object>> UserChart() {
+		return dao.UserChart();
+	}
+	
+	public List<Map<String, Object>> regiChart() {
+		return dao.regiChart();
 	}
 }

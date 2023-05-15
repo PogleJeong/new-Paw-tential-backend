@@ -54,20 +54,20 @@ WHERE ID=#{id}
 
 
 	<select id="reportList" parameterType="mul.cam.a.admin.dto.PageParam"
-	resultType="mul.cam.a.admin.dto.ReportDto">
+	resultType="mul.cam.a.myfeed.dto.ReportDto">
 	select reporter, reported, content,
-	rtype, rdate,feedSeq
+	rtype, rdate, type
 	from
 			(select row_number()over(order by rdate desc) as rnum,
-			 reporter, reported, content, rtype, rdate, feedSeq
+			 reporter, reported, content, rtype, rdate, type
 	from report
 	where 1=1 
 		 <if test="choice != null and choice != '' and search != null and search != '' ">
-		 	<if test="choice == 'reporter'">
-		 		and reporter like concat('%', #{search}, '%')
-		 	</if>
 		 	<if test="choice == 'reported'">
-		 		and reported like concat('%', #{search}, '%') 
+		 		and reported like concat('%', #{search}, '%')
+		 	</if>
+		 	<if test="choice == 'type'">
+		 		and type like concat('%', #{search}, '%') 
 		 	</if>
 		 	<if test="choice == 'rtype'">
 		 		and rtype like concat('%', #{search}, '%')
@@ -98,7 +98,7 @@ WHERE ID=#{id}
 <!-- 문의 목록 -->
 
 	<select id="QnAList" parameterType="mul.cam.a.admin.dto.PageParam"
-	resultType="mul.cam.a.admin.dto.QnADto">
+	resultType="mul.cam.a.myfeed.dto.QnADto">
 	select seq,content, id, whether, email, wdate
 	from
 			(select row_number()over(order by wdate desc) as rnum,
@@ -147,7 +147,25 @@ WHERE seq = #{seq}
 </update>
 
 
-	
+<select id="petChart" resultType="java.util.Map">
+SELECT cate, COUNT(*) AS count
+FROM Pet
+GROUP BY cate;
+
+</select>
+
+<select id="UserChart" resultType="java.util.Map">
+SELECT CONCAT(FLOOR((YEAR(CURDATE()) - YEAR(STR_TO_DATE(birth, '%Y%m%d'))) / 10) * 10, '대') AS age_group, gender, COUNT(*) AS count
+FROM Member
+GROUP BY age_group, gender;
+
+</select>
+
+	    <select id="regiChart" resultType="java.util.Map">
+        SELECT DATE(regiDate) AS regiDate, COUNT(*) AS count
+        FROM Member
+        GROUP BY DATE(regiDate);
+    </select>
 	
 
 </mapper>
