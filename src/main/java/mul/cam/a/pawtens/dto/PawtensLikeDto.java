@@ -2,6 +2,7 @@ package mul.cam.a.pawtens.dto;
 
 import java.io.Serializable;
 
+
 public class PawtensLikeDto implements Serializable {
 	private int seq;
 	private int pawtens_seq;
