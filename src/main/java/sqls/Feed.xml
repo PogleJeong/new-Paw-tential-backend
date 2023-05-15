@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.feed.dao.FeedDao">
+	
+	<!-- 메인 - 모든 피드 불러오기 -->
+	<select id="getAllFeed" resultType="mul.cam.a.feed.dto.FeedDto">
+		SELECT FE.SEQ, 
+		       FE.ID,
+		       M.PROFILE,
+		       FE.CONTENT,
+		       FE.LOCATION,
+		       FE.DATE_CREATED,
+		       F.FAVORITECOUNT,
+		       C.COMMENTCOUNT,
+		       B.BOOKMARKCOUNT
+		FROM FEED FE 
+		INNER JOIN MEMBER M ON FE.ID = M.ID
+		LEFT OUTER JOIN (
+		   SELECT FEED_SEQ, COUNT(*) AS FAVORITECOUNT 
+		   FROM FAVORITES 
+		   GROUP BY FEED_SEQ
+		) F ON F.FEED_SEQ = FE.SEQ
+		LEFT OUTER JOIN (
+		   SELECT FEED_SEQ, COUNT(*) AS COMMENTCOUNT 
+		   FROM COMMENT 
+		   GROUP BY FEED_SEQ
+		) C ON C.FEED_SEQ = FE.SEQ
+		LEFT OUTER JOIN (
+		   SELECT FEED_SEQ, COUNT(*) AS BOOKMARKCOUNT 
+		   FROM BOOKMARK 
+		   GROUP BY FEED_SEQ
+		) B ON B.FEED_SEQ = FE.SEQ
+		ORDER BY FE.DATE_CREATED DESC
+	</select>
+	
+	<!-- 메인 - 내가 팔로우 한 유저의 피드 불러오기 -->
+	
+	<!-- 메인 - 특정 피드 원본 불러오기 -->
+	<select id="loadPost" parameterType="Integer" resultType="mul.cam.a.feed.dto.FeedDto">
+		SELECT *
+		FROM FEED
+		WHERE SEQ = ${seq}
+	</select>
+	
+	<!-- 메인 - 피드 작성하기 -->
+	<insert id="feedWrite" parameterType="mul.cam.a.feed.dto.FeedDto">
+		INSERT INTO FEED(ID, CONTENT, LOCATION)
+		VALUES(#{id}, #{content}, IFNULL(#{location}, NULL))
+	</insert>
+	
+	<!-- 메인 - 특정 피드 수정하기 -->
+	<update id="feedModify" parameterType="mul.cam.a.feed.dto.FeedDto">
+		UPDATE FEED
+		SET CONTENT = #{content}
+		WHERE SEQ = ${seq}
+	</update>
+	
+	<!-- 메인 - 특정 피드 삭제 -->
+	<delete id="feedDelete" parameterType="Integer">
+		DELETE
+		FROM FEED
+		WHERE SEQ = ${seq}
+	</delete>
+	
+</mapper>

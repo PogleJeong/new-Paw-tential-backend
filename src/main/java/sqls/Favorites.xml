@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.favorites.dao.FavoritesDAO">
+
+	<!--  좋아요 클릭한 적 있는지 조사 -->
+	<select id="hasLiked" parameterType="mul.cam.a.favorites.dto.FavoritesDto" resultType="Integer">
+	SELECT COUNT(*)
+	FROM FAVORITES
+	WHERE FEED_SEQ = ${feedSeq} AND ID = #{id}
+	</select>
+
+	<!-- 좋아요 처리 -->
+	<insert id="like" parameterType="mul.cam.a.favorites.dto.FavoritesDto">
+	INSERT INTO FAVORITES(FEED_SEQ, ID)
+	VALUES(${feedSeq}, #{id})
+	</insert>
+	
+	<!-- 좋아요 취소 처리 -->
+	<delete id="unLike" parameterType="mul.cam.a.favorites.dto.FavoritesDto">
+	DELETE
+	FROM FAVORITES
+	WHERE FEED_SEQ = ${feedSeq} AND ID = #{id}
+	</delete>
+
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.contest.dao.ContestDAO">
+	
+	<!-- 진행 중인 콘테스트와 당첨자 발표 피드 불러오기 -->
+	<select id="getContestAndWinners" resultType="mul.cam.a.contest.dto.ContestDTO">
+		SELECT *
+		FROM CONTEST
+		WHERE (CATEGORY = '콘테스트' OR CATEGORY = '당첨자 발표')
+		  AND (STR_TO_DATE(STARTDT, '%a %b %d %Y %H:%i:%s') &lt; NOW() OR STARTDT IS NULL)
+		  AND (STR_TO_DATE(ENDDT, '%a %b %d %Y %H:%i:%s') &gt; NOW() OR ENDDT IS NULL);
+	</select>
+	
+	<!-- 콘테스트 및 당첨자 발표 상세 -->
+	<select id="fetchData" parameterType="Integer" resultType="mul.cam.a.contest.dto.ContestDTO">
+		SELECT *
+		FROM CONTEST
+		WHERE SEQ = ${seq}
+	</select>
+	
+	<!-- 콘테스트 및 당첨자 발표 등록 -->
+	<insert id="createContest" parameterType="mul.cam.a.contest.dto.ContestDTO">
+		INSERT INTO CONTEST(ID, CATEGORY, STARTDT, ENDDT, CONTENT)
+		VALUES(#{id}, #{category}, #{startDt}, #{endDt}, #{content})
+	</insert>
+	
+	<!-- 콘테스트 및 당첨자 발표 수정 -->
+	<update id="modifyContest" parameterType="mul.cam.a.contest.dto.ContestDTO">
+		UPDATE CONTEST
+		SET
+		<if test="startDt != null and !startDt.isEmpty()">
+			STARTDT = #{startDt}
+			,
+		</if>
+		<if test="endDt != null and !endDt.isEmpty()">
+			ENDDT = #{endDt}
+			,
+		</if>
+		CONTENT = #{content}
+		WHERE SEQ = ${seq}
+	</update>
+	
+	<!-- 콘테스트 및 당첨자 발표 삭제 -->
+	<delete id="contestDelete" parameterType="Integer">
+		DELETE
+		FROM CONTEST
+		WHERE SEQ = ${seq}
+	</delete>
+	
+	<!-- 특정 콘테스트 or 당첨자 발표에 작성된 댓글 리스트 -->
+	<select id="getComment" parameterType="Integer" resultType="mul.cam.a.contest.dto.ContestCommentDTO">
+		SELECT CC.*, M.PROFILE
+		FROM CONTEST_COMMENT CC, MEMBER M
+		WHERE CC.ID = M.ID
+			AND CONTEST_SEQ = ${contestSeq}
+	</select>
+	
+	<!-- 특정 콘테스트 or 당첨자 발표에 작성된 댓글 개수 -->
+	<select id="commentCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*)
+		FROM CONTEST_COMMENT
+		WHERE CONTEST_SEQ = ${contestSeq}
+	</select>
+	
+	<!-- 특정 콘테스트 or 당첨자 발표에 댓글 작성 -->
+	<insert id="writeContestCmt" parameterType="mul.cam.a.contest.dto.ContestCommentDTO">
+		INSERT INTO CONTEST_COMMENT(CONTEST_SEQ, ID, CONTENT)
+		VALUES(#{contestSeq}, #{id}, #{content})
+	</insert>
+	
+	<!-- 특정 콘테스트 or 당첨자 발표에 댓글 수정 -->
+	<insert id="cmtModify" parameterType="mul.cam.a.contest.dto.ContestCommentDTO">
+		UPDATE CONTEST_COMMENT
+		SET CONTENT = #{content}
+		WHERE SEQ = ${seq}
+	</insert>
+	
+	<!-- 특정 콘테스트 or 당첨자 발표에 댓글 삭제 -->
+	<insert id="cmtDelete" parameterType="Integer">
+		DELETE
+		FROM CONTEST_COMMENT
+		WHERE SEQ = ${seq}
+	</insert>
+	
+</mapper>
