@@ -13,7 +13,7 @@ public class WebConfigurer implements WebMvcConfigurer{
 		System.out.println("WebConfigurer 접속 클라이언트를 허가");
 		// 접속 클라이언트를 허가
 		registry.addMapping("/**")
-			    .allowedOriginPatterns("*")
+					.allowedOriginPatterns("*")
 					.allowedMethods("GET", "POST", "PUT", "DELETE")
 					.allowCredentials(true)
 					.allowedHeaders("*");
