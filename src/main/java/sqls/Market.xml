@@ -30,7 +30,7 @@
 	<select id="printAllMarketList" parameterType="Integer" resultType="mul.cam.a.market.dto.MarketDto">
 		select *
 		from market
-		where del=0 
+		where del=0
 		order by wdate
 		limit 20 offset #{pages}
 		<!-- 삭제되지 않은 게시물 del=0-->
@@ -66,11 +66,10 @@
 		where posting=#{posting}
 	</select>
 	
-	<update id="deleteMarket" parameterType="hashmap">
-		update market
-		set del=1
+	<delete id="deleteMarket" parameterType="hashmap">
+		delete from market
 		where id=#{id} and posting=#{posting}
-	</update>
+	</delete>
 	
 	<select id="marketNumberOfLike" parameterType="Integer" resultType="Integer">
 		select count(*)

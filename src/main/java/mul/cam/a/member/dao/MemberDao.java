@@ -15,6 +15,7 @@ public interface MemberDao {
 	int emailCheck(String email);
 	int nicknameCheck(String nickname);
 	String getNickname(String id);
+	String getProfile(String id);
 	
 	MemberDto login(MemberDto member);
 	int addMember(MemberDto member);

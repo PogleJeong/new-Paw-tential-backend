@@ -1,8 +1,12 @@
 package mul.cam.a.member.controller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mul.cam.a.member.dto.AuthenticationDto;
 import mul.cam.a.member.dto.MemberDto;
 import mul.cam.a.member.service.MemberService;
@@ -42,6 +47,30 @@ public class MemberController {
 		return service.getNickname(id);
 	}
 	
+	@PostMapping(value="/get/profile")
+	public Map<String, Object> getProfile(String id, HttpServletRequest req) {
+		System.out.println("get profile >>" + new Date() );
+		String profileName = service.getProfile(id);
+		
+		Map<String, Object> map = new HashMap<>();
+		String uploadPath = "";
+		try {
+			if (profileName.equals("baseprofile")) {
+				uploadPath = req.getServletContext().getRealPath("/upload/baseImg/baseprofile.png");			
+			} else {
+				uploadPath = req.getServletContext().getRealPath("/upload/myfeed/"+profileName);
+			}
+			InputStream imageStream = new FileInputStream(uploadPath);
+			byte[] imageByte = IOUtils.toByteArray(imageStream);
+			map.put("profile", imageByte);
+		} catch(Exception e) {
+			System.out.println("파일불러오기 오류");
+			return null;
+		}
+		
+		return map;
+	}
+	
 	@PostMapping(value="/login")
 	public HashMap<String, Object> login(String id, String password) {
 		System.out.println("login controller >> " + new Date());
@@ -49,9 +78,7 @@ public class MemberController {
 		MemberDto member = new MemberDto(id, password);
 		
 		HashMap<String, Object> loginResult = service.login(member);
-		System.out.println(loginResult.get("state"));
-		System.out.println(loginResult.get("USER_ID"));
-		System.out.println(loginResult.get("USER_NICKNAME"));
+
 		return loginResult;
 	}
 	
@@ -121,7 +148,7 @@ public class MemberController {
 		
 		// setViewName 은 view 의 이름, redirect 를 통해 외부 url 에 이동가능
 		// addObject는 url params 에 포함된다.
-		mv.setViewName("redirect:http://localhost:9001/market");
+		mv.setViewName("redirect:http://localhost:9001/home/home");
 		mv.addObject("USER_ID", kakaoInfo.get("id"));
 		mv.addObject("USER_NICKNAME", kakaoInfo.get("nickname"));
 		return mv;
@@ -154,7 +181,7 @@ public class MemberController {
 		else naverInfo.put("id",service.findIdByEmail(naverEmail));
 		// setViewName 은 view 의 이름, redirect 를 통해 외부 url 에 이동가능
 		// addObject는 url params 에 포함된다.
-		mv.setViewName("redirect:http://localhost:9001/market");
+		mv.setViewName("redirect:http://localhost:9001/home/home");
 		mv.addObject("USER_ID", naverInfo.get("id"));
 		mv.addObject("USER_NICKNAME", naverInfo.get("nickname"));
 		return mv;

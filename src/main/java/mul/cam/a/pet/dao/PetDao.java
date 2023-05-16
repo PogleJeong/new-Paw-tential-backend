@@ -9,4 +9,6 @@ import mul.cam.a.pet.dto.PetDto;
 @Repository
 public interface PetDao {
 	int petRegister(PetDto petInfo);
+	int removePetInfo(String id);
+	PetDto[] getPetInfoList(String id);
 }

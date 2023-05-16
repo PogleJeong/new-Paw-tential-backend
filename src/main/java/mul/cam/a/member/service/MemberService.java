@@ -59,6 +59,10 @@ public class MemberService {
 		return dao.getNickname(id);
 	}
 	
+	public String getProfile(String id) {
+		return dao.getProfile(id);
+	}
+	
 	public HashMap<String, Object> login(MemberDto member) {
 		System.out.println("login service >> " + new Date());
 		HashMap<String, Object> loginResult = new HashMap<>();
@@ -73,7 +77,8 @@ public class MemberService {
 	
 		// DB에서 해싱비밀번호를 꺼내고 비교해야함 (같은 비밀번호를 해싱하여도 다른값이 나오기 때문)
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
+		System.out.println("로그인에 들어간 해싱값: " + member.getPwd());
+		System.out.println("db에 존재하는 해싱값: " + userInfo.getPwd());
 		boolean matchPassword = passwordEncoder.matches(member.getPwd(), userInfo.getPwd());
 		
 		if (matchPassword == false) {

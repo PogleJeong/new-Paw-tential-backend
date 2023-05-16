@@ -17,4 +17,12 @@ public class PetService {
 	public String petRegister(PetDto petInfo) {
 		return dao.petRegister(petInfo) > 0 ? "YES" : "NO";
 	}
+	
+	public PetDto[] getPetInfoList(String id) {
+		return dao.getPetInfoList(id);
+	}
+	
+	public void removePetInfo(String id) {
+		dao.removePetInfo(id);
+	}
 }

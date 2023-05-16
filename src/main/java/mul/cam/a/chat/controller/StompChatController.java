@@ -3,10 +3,6 @@ package mul.cam.a.chat.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.messaging.handler.annotation.MessageMapping;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
