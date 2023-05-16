@@ -5,11 +5,11 @@
 <mapper namespace="mul.cam.a.search.dao.SearchDao">
 
 	<!-- 피드 검색 목록 -->
-	<select id="searchList" parameterType="mul.cam.a.feed.dto.FeedParam" resultType="mul.cam.a.feed.dto.FeedDto">
-		select seq, id, content, tag, location, filename, date_created, date_updated, realpathfile
+	<select id="searchList" parameterType="mul.cam.a.feed.dto.FeedParam" resultType="map">
+		select a.seq, a.id, a.content, a.location, a.date_created, b.profile, b.nickname
 		from 
 			( select row_number()over(order by seq desc) as rnum,
-			    seq, id, content, tag, location, filename, date_created, date_updated, realpathfile
+			    seq, id, content, location, date_created
 				from feed 
 				where 1=1 
 				<if test="search != null and search != ''">
@@ -17,7 +17,8 @@
 				</if>
 				order by seq desc
 			) a
-			where rnum between #{start} and #{end}
+			left join member as b on a.id = b.id
+			where a.rnum between #{start} and #{end}
 	</select>
 	
 	<!-- 피드 검색 결과 총 개수 -->

@@ -32,7 +32,7 @@ public class SearchController {
 		param.setStart(start);
 		param.setEnd(end);
 		
-		List<FeedDto> list = service.searchList(param);
+		List<Map<String, Object>> list = service.searchList(param);
 		int len = service.getAllResult(param);
 		
 		List<MemberDto> userlist = service.searchUserList(param);
