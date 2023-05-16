@@ -1,6 +1,7 @@
 package mul.cam.a.search.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import mul.cam.a.member.dto.MemberDto;
 @Repository
 public interface SearchDao {
 
-	List<FeedDto> searchList(FeedParam param);
+	 List<Map<String, Object>> searchList(FeedParam param);
 	
 	int getAllResult(FeedParam param);
 	
