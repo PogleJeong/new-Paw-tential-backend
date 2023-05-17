@@ -19,7 +19,6 @@ public class MarketDto {
 	private int posting;
 	private String geoLat;
 	private String geoLng;
-	
 
 	public MarketDto() {
 		// TODO Auto-generated constructor stub
