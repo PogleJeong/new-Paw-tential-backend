@@ -32,6 +32,8 @@ public interface MyfeedDao {
 	int getFollowing(String id);
 	
 	int follow(FollowDto dto);
+	
+	int unfollow(FollowDto dto);
 
 	List<String> followerList (String id);
 	
