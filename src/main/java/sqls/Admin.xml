@@ -149,7 +149,7 @@ WHERE seq = #{seq}
 
 </update>
 
-
+<!-- 펫 차트 -->
 <select id="petChart" resultType="java.util.Map">
 SELECT cate, COUNT(*) AS count
 FROM Pet
