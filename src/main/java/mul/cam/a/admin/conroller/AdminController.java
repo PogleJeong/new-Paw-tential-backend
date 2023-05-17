@@ -81,7 +81,7 @@ public class AdminController {
 				param.setStart(start);
 				param.setEnd(end);
 				
-				List<ReportDto> list = service.reportList(param);
+				List<Map<String, Object>> list = service.reportList(param);
 				int len = service.getAllReport(param);
 				
 				

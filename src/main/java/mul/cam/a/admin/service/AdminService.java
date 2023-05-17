@@ -39,7 +39,7 @@ public class AdminService {
 	}
 	
 	
-	public List<ReportDto> reportList(PageParam param){
+	public List<Map<String, Object>> reportList(PageParam param){
 		return dao.reportList(param);
 	}
 	

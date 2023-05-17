@@ -36,6 +36,7 @@ public class FeedController {
 	// 메인 - 특정 피드 원본 불러오기
 	@GetMapping("/home/loadPost")
 	public FeedDto loadPost(int seq) {
+		System.out.println(seq);
 		return service.loadPost(seq);
 	}
 	
