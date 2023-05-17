@@ -136,8 +136,11 @@ WHERE ID=#{id}
 	 		WHERE content LIKE concat('%', #{search}, '%') 
 	 	</if>
 	 </if>
+	 
 </select>
 
+
+<!-- 문의 답변 완료 처리 -->
 <update id="answer" parameterType="Integer">
 
 UPDATE QnA 
@@ -164,8 +167,16 @@ GROUP BY age_group, gender;
 	    <select id="regiChart" resultType="java.util.Map">
         SELECT DATE(regiDate) AS regiDate, COUNT(*) AS count
         FROM Member
-        GROUP BY DATE(regiDate);
+        GROUP BY DATE(regiDate)
+        order by regidate asc
     </select>
+    
+   <!--  마켓 정보 가져오기 -->
+    	<select id="marketDetail" parameterType="Integer" resultType="mul.cam.a.market.dto.MarketDto">
+	SELECT *
+	FROM MARKET
+	WHERE posting=#{posting}
+	</select>
 	
 
 </mapper>

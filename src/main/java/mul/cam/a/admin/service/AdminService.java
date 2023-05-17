@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.cam.a.admin.dao.AdminDao;
 import mul.cam.a.admin.dto.PageParam;
-
+import mul.cam.a.market.dto.MarketDto;
 import mul.cam.a.member.dto.MemberDto;
 import mul.cam.a.myfeed.dto.QnADto;
 import mul.cam.a.myfeed.dto.ReportDto;
@@ -70,5 +70,9 @@ public class AdminService {
 	
 	public List<Map<String, Object>> regiChart() {
 		return dao.regiChart();
+	}
+	
+	public MarketDto marketDetail(int seq) {
+		return dao.marketDetail(seq);
 	}
 }

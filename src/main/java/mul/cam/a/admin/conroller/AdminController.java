@@ -1,18 +1,23 @@
 package mul.cam.a.admin.conroller;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mul.cam.a.admin.dto.PageParam;
 
 import mul.cam.a.admin.service.AdminService;
+import mul.cam.a.market.dto.MarketDto;
 import mul.cam.a.member.dto.MemberDto;
 import mul.cam.a.myfeed.dto.QnADto;
 import mul.cam.a.myfeed.dto.ReportDto;
@@ -154,5 +159,28 @@ public class AdminController {
 
 			
 			return service.regiChart();
+		}
+		
+		@GetMapping(value = "marketDetail")
+		public Map<String, Object> marketDetail(int seq, HttpServletRequest req) {
+			System.out.println("마켓 정보 가져오기 " + new Date());
+			MarketDto marketInfo = service.marketDetail(seq);
+			Map<String, Object> map = new HashMap<>(); 
+			try {
+				// 업로드파일위치
+				String uploadPath = req.getServletContext().getRealPath("/upload/market/"+marketInfo.getFile());
+				InputStream imageStream = new FileInputStream(uploadPath);
+				byte[] imageByte = IOUtils.toByteArray(imageStream);
+				map.put("marketInfo", marketInfo);
+				map.put("imgInfo", imageByte);
+
+
+			}catch (Exception e) {
+				System.out.println("파일불러오기 오류");
+				return null;
+			}
+			
+			return map;
+
 		}
 }
