@@ -8,4 +8,14 @@
 		values(#{id}, #{cate}, #{img}, #{name}, #{birth}, #{intro}, #{gender})
 	</insert>
 	
+	<delete id="removePetInfo" parameterType="String">
+		delete from pet
+		where id=#{id}
+	</delete>
+	
+	<select id="getPetInfoList" parameterType="String" resultType="mul.cam.a.pet.dto.PetDto">
+		select *
+		from pet
+		where id=#{id}
+	</select>
 </mapper>
