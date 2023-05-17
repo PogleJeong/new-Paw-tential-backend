@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 //Main Feed Dto
 public class FeedDto implements Serializable {
 	
-	private String id, content, location, profile;
+	private String id, content, location, profile, nickname;
 	private int seq, favoriteCount, commentCount, bookmarkCount;
 	@DateTimeFormat(pattern = "yy-MM-dd hh:mm")
 	private Date dateCreated, dateUpdated;
@@ -17,13 +17,14 @@ public class FeedDto implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FeedDto(String id, String content, String location, String profile, int seq, int favoriteCount,
-			int commentCount, int bookmarkCount, Date dateCreated, Date dateUpdated) {
+	public FeedDto(String id, String content, String location, String profile, String nickname, int seq,
+			int favoriteCount, int commentCount, int bookmarkCount, Date dateCreated, Date dateUpdated) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.location = location;
 		this.profile = profile;
+		this.nickname = nickname;
 		this.seq = seq;
 		this.favoriteCount = favoriteCount;
 		this.commentCount = commentCount;
@@ -62,6 +63,14 @@ public class FeedDto implements Serializable {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getSeq() {
@@ -115,9 +124,11 @@ public class FeedDto implements Serializable {
 	@Override
 	public String toString() {
 		return "FeedDto [id=" + id + ", content=" + content + ", location=" + location + ", profile=" + profile
-				+ ", seq=" + seq + ", favoriteCount=" + favoriteCount + ", commentCount=" + commentCount
-				+ ", bookmarkCount=" + bookmarkCount + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
-				+ "]";
+				+ ", nickname=" + nickname + ", seq=" + seq + ", favoriteCount=" + favoriteCount + ", commentCount="
+				+ commentCount + ", bookmarkCount=" + bookmarkCount + ", dateCreated=" + dateCreated + ", dateUpdated="
+				+ dateUpdated + "]";
 	}
+	
+	
 	
 }
