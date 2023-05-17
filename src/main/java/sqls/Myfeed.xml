@@ -126,10 +126,19 @@ WHERE following_id = #{following_id};
 		
 		<!-- 신고 작성 -->
 		<insert id="sendReport" parameterType="mul.cam.a.myfeed.dto.ReportDto">
-		INSERT INTO report(content, reporter, reported, rtype, rdate, type)
-		VALUES(#{content},#{reporter},#{reported},#{rtype},now(), #{type})
+		INSERT INTO report(content, reporter, reported, rtype, rdate, type, feed_seq, market_seq)
+		VALUES(#{content},#{reporter},#{reported},#{rtype},now(), #{type}, #{feed_seq}, #{market_seq})
 		
 		</insert>
+		
+		<!-- 펫정보 가져오기 -->
+		<select id="petList" parameterType="String" resultType="Map">
+		
+		SELECT *
+FROM Pet
+WHERE id = #{id}
+		
+		</select>
 		
 
 

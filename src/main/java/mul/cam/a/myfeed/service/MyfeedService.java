@@ -91,4 +91,8 @@ public class MyfeedService {
 
 		return n>0?true:false;
 	}
+	
+	public List<Map<String, Object>> petList(String id) {
+		return dao.petList(id);
+	}
 }

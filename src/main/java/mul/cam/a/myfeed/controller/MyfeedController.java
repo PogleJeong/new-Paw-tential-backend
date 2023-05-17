@@ -185,6 +185,7 @@ public class MyfeedController {
 	@PostMapping(value = "sendReport")
 	public String sendReport(ReportDto dto){
 		System.out.println("신고 작성 체크" + new Date());
+		System.out.println("신고 작성 파라미터 "+dto);
 		
 		boolean b = service.sendReport(dto);
 		
@@ -193,6 +194,17 @@ public class MyfeedController {
 			
 		} 
 		return "YES";
+
+	}
+	
+	@GetMapping(value = "petList")
+	public List<Map<String, Object>> petList(String id){
+		System.out.println("펫 정보 가져오기" + new Date());
+		List<Map<String, Object>> list = service.petList(id);
+		System.out.println(id);
+
+		System.out.println("펫 정보 : "+service.petList(id));
+		return list;
 
 	}
 	

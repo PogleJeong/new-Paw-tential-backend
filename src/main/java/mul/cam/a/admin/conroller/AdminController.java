@@ -23,11 +23,11 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
-	// 관리자 정보
+	// 유저 정보
 	@GetMapping(value = "userInfo")
 	public MemberDto userInfo(String id) {
 		System.out.println("AdminController userInfo " + new Date());
-		
+
 		return service.userInfo(id);
 		
 
@@ -52,6 +52,7 @@ public class AdminController {
 			Map<String, Object> map = new HashMap<>();
 			map.put("list", list);
 			map.put("cnt", len);
+			System.out.println(list.toString());
 			
 
 			return map;		
@@ -81,7 +82,7 @@ public class AdminController {
 				param.setStart(start);
 				param.setEnd(end);
 				
-				List<ReportDto> list = service.reportList(param);
+				List<Map<String, Object>> list = service.reportList(param);
 				int len = service.getAllReport(param);
 				
 				

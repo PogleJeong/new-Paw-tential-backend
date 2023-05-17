@@ -54,12 +54,12 @@ WHERE ID=#{id}
 
 
 	<select id="reportList" parameterType="mul.cam.a.admin.dto.PageParam"
-	resultType="mul.cam.a.myfeed.dto.ReportDto">
+	resultType="Map">
 	select reporter, reported, content,
-	rtype, rdate, type
+	rtype, rdate, type, feed_seq, market_seq
 	from
 			(select row_number()over(order by rdate desc) as rnum,
-			 reporter, reported, content, rtype, rdate, type
+			 reporter, reported, content, rtype, rdate, type, feed_seq, market_seq
 	from report
 	where 1=1 
 		 <if test="choice != null and choice != '' and search != null and search != '' ">
@@ -82,8 +82,8 @@ WHERE ID=#{id}
 	SELECT IFNULL(COUNT(*), 0)
 	FROM report
 	<if test="choice != null and choice != '' and search != null and search != '' ">
-	 	 <if test="choice == 'reporter'">
-	 		WHERE reporter LIKE concat('%', #{search}, '%') 
+	 	 <if test="choice == 'type'">
+	 		WHERE type LIKE concat('%', #{search}, '%') 
 	 	</if>
 	 	<if test="choice == 'reported'">
 	 		WHERE reported LIKE concat('%', #{search}, '%') 
