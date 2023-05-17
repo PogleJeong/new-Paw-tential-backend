@@ -27,6 +27,11 @@ public class FeedService {
 		return dao.loadPost(seq);
 	}
 	
+	// 메인 - 특정 피드 원본 불러오기
+	public Map<String, Object> loadPost2(int seq) {
+		return dao.loadPost2(seq);
+	}
+	
 	// 메인 - 피드 작성하기
 	public int feedWrite(FeedDto dto) {
 		return dao.feedWrite(dto);

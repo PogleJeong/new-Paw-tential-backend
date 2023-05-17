@@ -45,6 +45,14 @@
 		WHERE SEQ = ${seq}
 	</select>
 	
+	<!-- 메인 - 특정 피드 원본 불러오기 -->
+	<select id="loadPost2" parameterType="Integer" resultType="map">
+		select fe.seq, fe.id, fe.content, fe.location, fe.date_created, m.profile, m.nickname
+		from feed fe
+		left join member as m on fe.id = m.id
+		where seq = ${seq};
+	</select>
+	
 	<!-- 메인 - 피드 작성하기 -->
 	<insert id="feedWrite" parameterType="mul.cam.a.feed.dto.FeedDto">
 		INSERT INTO FEED(ID, CONTENT, LOCATION)

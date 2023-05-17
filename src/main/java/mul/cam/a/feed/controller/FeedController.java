@@ -40,6 +40,13 @@ public class FeedController {
 		return service.loadPost(seq);
 	}
 	
+	// 메인 - 특정 피드 원본 불러오기
+	@GetMapping("/home/loadPost2")
+	public Map<String, Object> loadPost2(int seq) {
+		System.out.println(seq);
+		return service.loadPost2(seq);
+	}
+	
 	// 메인 - 피드 작성하기
 	@PostMapping("/home/feedWrite")
 	public String feedWrite(FeedDto dto) {
