@@ -4,16 +4,17 @@ import java.io.Serializable;
 
 public class GroupFeedLikeDTO implements Serializable {
 	private int grpFeedNo;
-	private String grpFeedLikeId;
+	private String grpFeedLikeId, nickname;
 	
 	public GroupFeedLikeDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GroupFeedLikeDTO(int grpFeedNo, String grpFeedLikeId) {
+	public GroupFeedLikeDTO(int grpFeedNo, String grpFeedLikeId, String nickname) {
 		super();
 		this.grpFeedNo = grpFeedNo;
 		this.grpFeedLikeId = grpFeedLikeId;
+		this.nickname = nickname;
 	}
 
 	public int getGrpFeedNo() {
@@ -32,9 +33,18 @@ public class GroupFeedLikeDTO implements Serializable {
 		this.grpFeedLikeId = grpFeedLikeId;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "GroupFeedLike [grpFeedNo=" + grpFeedNo + ", grpFeedLikeId=" + grpFeedLikeId + "]";
+		return "GroupFeedLikeDTO [grpFeedNo=" + grpFeedNo + ", grpFeedLikeId=" + grpFeedLikeId + ", nickname="
+				+ nickname + "]";
 	}
 	
 

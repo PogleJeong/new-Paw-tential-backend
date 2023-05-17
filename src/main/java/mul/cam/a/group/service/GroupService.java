@@ -24,7 +24,7 @@ public class GroupService {
 	GroupDAO dao;
 	
 	// 로그인 한 유저의 프로필 사진 가져오기
-	public String getUserProfile(String id) {
+	public MemberDto getUserProfile(String id) {
 		return dao.getUserProfile(id);
 	}
 	
@@ -44,7 +44,7 @@ public class GroupService {
 	}
 	
 	// 로그인 한 유저의 프로필 사진 가져오기
-	public String getProfileImage(String id) {
+	public MemberDto getProfileImage(String id) {
 		return dao.getProfileImage(id);
 	}
 	

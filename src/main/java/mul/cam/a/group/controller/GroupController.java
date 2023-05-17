@@ -23,6 +23,7 @@ import mul.cam.a.group.dto.GroupSearchParam;
 import mul.cam.a.group.dto.MemberGroupDTO;
 import mul.cam.a.group.service.GroupService;
 import mul.cam.a.group.util.FileUtil;
+import mul.cam.a.member.dto.MemberDto;
 
 @RestController
 public class GroupController {
@@ -32,7 +33,7 @@ public class GroupController {
 	
 	// 로그인 한 유저의 프로필 사진 가져오기
 	@GetMapping("/group/getUserProfile")
-	public String getUserProfile(String id) {
+	public MemberDto getUserProfile(String id) {
 		return service.getUserProfile(id);
 	}
 	
@@ -61,7 +62,7 @@ public class GroupController {
 	
 	// 로그인 한 유저의 프로필 사진 가져오기
 	@GetMapping("/group/getProfileImage")
-	public String getProfileImage(String id) {
+	public MemberDto getProfileImage(String id) {
 		return service.getProfileImage(id);
 	}
 	
@@ -85,6 +86,7 @@ public class GroupController {
 	// 특정 그룹 방문 시 로직
 	@PostMapping("/group/isMember")
 	public Map<String, Object> isMember(MemberGroupDTO dto) {
+		System.out.println(dto);
 		
 		Map<String, Object> map = new HashMap<>();
 		

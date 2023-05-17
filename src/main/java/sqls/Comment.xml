@@ -6,7 +6,7 @@
 
 	<!-- 특정 피드의 댓글 가져오기 -->
 	<select id="getCommentList" parameterType="Integer" resultType="mul.cam.a.comment.dto.CommentDto">
-		SELECT C.*, M.PROFILE
+		SELECT C.*, M.PROFILE, M.NICKNAME
 		FROM COMMENT C, MEMBER M
 		WHERE M.ID = C.ID AND C.FEED_SEQ = ${feedSeq}
 	</select>
