@@ -9,6 +9,7 @@
 		SELECT FE.SEQ, 
 		       FE.ID,
 		       M.PROFILE,
+		       M.NICKNAME,
 		       FE.CONTENT,
 		       FE.LOCATION,
 		       FE.DATE_CREATED,
