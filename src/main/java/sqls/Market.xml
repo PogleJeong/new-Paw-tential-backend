@@ -28,11 +28,11 @@
 	
 	
 	<select id="printAllMarketList" parameterType="Integer" resultType="mul.cam.a.market.dto.MarketDto">
-		select *
-		from market
-		where del=0
-		order by wdate
-		limit 20 offset #{pages}
+		select * 
+		from market 
+		where del=0 
+		order by posting desc 
+		limit 20 offset #{pages} 
 		<!-- 삭제되지 않은 게시물 del=0-->
 		<!-- offset #{PAGE} 에서 limits 개수만큼 행출력 -->
 		
