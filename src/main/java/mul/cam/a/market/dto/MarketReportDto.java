@@ -7,9 +7,10 @@ public class MarketReportDto {
 	private String category;
 	private String content;
 	private String url;
+	private String type;
 	
 	public MarketReportDto(String title, String reporter, String reported, String category, String content,
-			String url) {
+			String url,String type) {
 		super();
 		this.title = title;
 		this.reporter = reporter;
@@ -17,6 +18,8 @@ public class MarketReportDto {
 		this.category = category;
 		this.content = content;
 		this.url = url;
+		this.type = type;
+
 	}
 	public String getReporter() {
 		return reporter;
@@ -53,6 +56,14 @@ public class MarketReportDto {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	@Override
 	public String toString() {
