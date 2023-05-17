@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import mul.cam.a.admin.dto.PageParam;
-
+import mul.cam.a.market.dto.MarketDto;
 import mul.cam.a.member.dto.MemberDto;
 import mul.cam.a.myfeed.dto.QnADto;
 import mul.cam.a.myfeed.dto.ReportDto;
@@ -27,7 +27,7 @@ public interface AdminDao {
 	
 	// 신고 관리
 	
-	List<ReportDto> reportList(PageParam param);
+	List<Map<String, Object>> reportList(PageParam param);
 	
 	int getAllReport(PageParam param);
 	
@@ -44,6 +44,8 @@ public interface AdminDao {
 	List<Map<String, Object>> UserChart();
 
 	List<Map<String, Object>> regiChart();
+	
+	MarketDto marketDetail(int seq);
 
 
 }

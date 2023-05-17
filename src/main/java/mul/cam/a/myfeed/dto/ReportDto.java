@@ -15,6 +15,7 @@ public class ReportDto {
 	private String content;
 	private String rtype;
 	private String rdate;
-	private int type;
-
+	private String type;
+	private int feed_seq;
+	private int market_seq;
 }
