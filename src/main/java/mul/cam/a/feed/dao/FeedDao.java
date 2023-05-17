@@ -18,6 +18,9 @@ public interface FeedDao {
 	// 메인 - 특정 피드 원본 불러오기
 	FeedDto loadPost(int seq);
 	
+	// 메인 - 특정 피드 원본 불러오기
+	Map<String, Object> loadPost2(int seq);
+	
 	// 메인 - 피드 작성하기
 	int feedWrite(FeedDto dto);
 	
