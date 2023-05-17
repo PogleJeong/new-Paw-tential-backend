@@ -36,6 +36,16 @@ public class GroupController {
 		return service.getUserProfile(id);
 	}
 	
+	// 맞팔 관계인 유저의 정보 가져오기
+	@GetMapping("/group/getMutualUsers")
+	public Map<String, Object> getMutualUsers(String following_id){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", service.getMutualUsers(following_id));
+		
+		return map;
+	}
+	
 	// 가입 그룹의 존재 여부
 	@GetMapping("/group/hasJoinedGroup")
 	public boolean hasJoinedGroup(String memberId) {

@@ -36,12 +36,14 @@ public class FeedController {
 	// 메인 - 특정 피드 원본 불러오기
 	@GetMapping("/home/loadPost")
 	public FeedDto loadPost(int seq) {
+		System.out.println(seq);
 		return service.loadPost(seq);
 	}
 	
 	// 메인 - 피드 작성하기
 	@PostMapping("/home/feedWrite")
 	public String feedWrite(FeedDto dto) {
+		System.out.println(dto.toString());
 		return service.feedWrite(dto) > 0 ? "피드가 작성되었습니다." : "피드 작성에 실패하였습니다.";
 	}
 	

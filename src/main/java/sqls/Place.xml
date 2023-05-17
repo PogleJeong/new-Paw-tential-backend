@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.cam.a.place.dao.PlaceDao">
+
+	<!-- 포텐 리뷰 -->
+	<select id="placeReview" parameterType="String" resultType="map">
+		select a.seq, a.id, a.content, a.location, a.date_created, b.profile, b.nickname
+			from feed  a
+			left join member as b on a.id = b.id
+			where a.location = #{location}
+	        order by a.seq desc;
+	</select>
+
+</mapper>

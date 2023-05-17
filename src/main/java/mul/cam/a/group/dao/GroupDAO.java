@@ -21,6 +21,9 @@ public interface GroupDAO {
 	// 로그인 한 유저의 프로필 사진 가져오기
 	String getUserProfile(String id);
 	
+	// 맞팔 관계인 유저의 정보 가져오기
+	List<MemberDto> getMutualUsers(String following_id);
+	
 	// 특정 회원의 그룹 가입 존재 여부 확인
 	int hasJoinedGroup(String id);
 	

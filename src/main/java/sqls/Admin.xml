@@ -54,12 +54,12 @@ WHERE ID=#{id}
 
 
 	<select id="reportList" parameterType="mul.cam.a.admin.dto.PageParam"
-	resultType="mul.cam.a.myfeed.dto.ReportDto">
+	resultType="Map">
 	select reporter, reported, content,
-	rtype, rdate, type
+	rtype, rdate, type,feed_seq,market_seq
 	from
 			(select row_number()over(order by rdate desc) as rnum,
-			 reporter, reported, content, rtype, rdate, type
+			 reporter, reported, content, rtype, rdate, type,feed_seq,market_seq
 	from report
 	where 1=1 
 		 <if test="choice != null and choice != '' and search != null and search != '' ">
@@ -136,8 +136,11 @@ WHERE ID=#{id}
 	 		WHERE content LIKE concat('%', #{search}, '%') 
 	 	</if>
 	 </if>
+	 
 </select>
 
+
+<!-- 문의 답변 완료 처리 -->
 <update id="answer" parameterType="Integer">
 
 UPDATE QnA 
@@ -146,7 +149,7 @@ WHERE seq = #{seq}
 
 </update>
 
-
+<!-- 펫 차트 -->
 <select id="petChart" resultType="java.util.Map">
 SELECT cate, COUNT(*) AS count
 FROM Pet
@@ -164,8 +167,16 @@ GROUP BY age_group, gender;
 	    <select id="regiChart" resultType="java.util.Map">
         SELECT DATE(regiDate) AS regiDate, COUNT(*) AS count
         FROM Member
-        GROUP BY DATE(regiDate);
+        GROUP BY DATE(regiDate)
+        order by regidate asc
     </select>
+    
+   <!--  마켓 정보 가져오기 -->
+    	<select id="marketDetail" parameterType="Integer" resultType="mul.cam.a.market.dto.MarketDto">
+	SELECT *
+	FROM MARKET
+	WHERE posting=#{posting}
+	</select>
 	
 
 </mapper>
