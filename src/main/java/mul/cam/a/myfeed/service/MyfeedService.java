@@ -49,11 +49,6 @@ public class MyfeedService {
 		return n>0?true:false;
 	}
 	
-	public boolean unfollow (FollowDto dto) {
-		int n = dao.unfollow(dto);
-		return n>0?true:false;
-	}
-	
 
 	public List<String> followerList(String id) {
 		return dao.followerList(id);
@@ -95,9 +90,5 @@ public class MyfeedService {
 		int n =  dao.sendReport(dto);
 
 		return n>0?true:false;
-	}
-	
-	public List<Map<String, Object>> petList(String id) {
-		return dao.petList(id);
 	}
 }

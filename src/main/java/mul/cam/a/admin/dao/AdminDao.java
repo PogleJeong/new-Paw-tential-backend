@@ -27,7 +27,7 @@ public interface AdminDao {
 	
 	// 신고 관리
 	
-	List<Map<String, Object>> reportList(PageParam param);
+	List<ReportDto> reportList(PageParam param);
 	
 	int getAllReport(PageParam param);
 	

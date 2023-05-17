@@ -13,7 +13,6 @@ import mul.cam.a.member.dto.MemberDto;
 import mul.cam.a.myfeed.dto.FollowDto;
 import mul.cam.a.myfeed.dto.QnADto;
 import mul.cam.a.myfeed.dto.ReportDto;
-import mul.cam.a.pet.dto.PetDto;
 
 @Mapper
 @Repository
@@ -32,8 +31,6 @@ public interface MyfeedDao {
 	int getFollowing(String id);
 	
 	int follow(FollowDto dto);
-	
-	int unfollow(FollowDto dto);
 
 	List<String> followerList (String id);
 	
@@ -48,8 +45,5 @@ public interface MyfeedDao {
 	int sendQnA (QnADto dto);
 
 	int sendReport (ReportDto dto);
-	
-	List<Map<String, Object>> petList(String id);
-
 
 }
