@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class GroupFeedDTO implements Serializable {
 
 	private int grpNo, grpFeedNo, grpFeedLikeCount, grpCommentCount;
-	private String grpName, grpFeedContent, grpFeedSetting, grpFeedId, profile, grpImage;
+	private String grpName, grpFeedContent, grpFeedSetting, grpFeedId, profile, grpImage, nickname;
 	@DateTimeFormat(pattern = "yy-MM-dd hh:mm")
 	private Date grpFeedWd;
 	
@@ -18,7 +18,7 @@ public class GroupFeedDTO implements Serializable {
 
 	public GroupFeedDTO(int grpNo, int grpFeedNo, int grpFeedLikeCount, int grpCommentCount, String grpName,
 			String grpFeedContent, String grpFeedSetting, String grpFeedId, String profile, String grpImage,
-			Date grpFeedWd) {
+			String nickname, Date grpFeedWd) {
 		super();
 		this.grpNo = grpNo;
 		this.grpFeedNo = grpFeedNo;
@@ -30,6 +30,7 @@ public class GroupFeedDTO implements Serializable {
 		this.grpFeedId = grpFeedId;
 		this.profile = profile;
 		this.grpImage = grpImage;
+		this.nickname = nickname;
 		this.grpFeedWd = grpFeedWd;
 	}
 
@@ -113,6 +114,14 @@ public class GroupFeedDTO implements Serializable {
 		this.grpImage = grpImage;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public Date getGrpFeedWd() {
 		return grpFeedWd;
 	}
@@ -126,7 +135,7 @@ public class GroupFeedDTO implements Serializable {
 		return "GroupFeedDTO [grpNo=" + grpNo + ", grpFeedNo=" + grpFeedNo + ", grpFeedLikeCount=" + grpFeedLikeCount
 				+ ", grpCommentCount=" + grpCommentCount + ", grpName=" + grpName + ", grpFeedContent=" + grpFeedContent
 				+ ", grpFeedSetting=" + grpFeedSetting + ", grpFeedId=" + grpFeedId + ", profile=" + profile
-				+ ", grpImage=" + grpImage + ", grpFeedWd=" + grpFeedWd + "]";
+				+ ", grpImage=" + grpImage + ", nickname=" + nickname + ", grpFeedWd=" + grpFeedWd + "]";
 	}
 	
 	

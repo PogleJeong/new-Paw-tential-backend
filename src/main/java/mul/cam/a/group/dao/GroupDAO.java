@@ -19,7 +19,7 @@ import mul.cam.a.member.dto.MemberDto;
 public interface GroupDAO {
 	
 	// 로그인 한 유저의 프로필 사진 가져오기
-	String getUserProfile(String id);
+	MemberDto getUserProfile(String id);
 	
 	// 맞팔 관계인 유저의 정보 가져오기
 	List<MemberDto> getMutualUsers(String following_id);
@@ -31,7 +31,7 @@ public interface GroupDAO {
 	int getGroupMember(String grpName);
 	
 	// 로그인 한 유저의 프로필 이미지 가져오기
-	String getProfileImage(String id);
+	MemberDto getProfileImage(String id);
 	
 	// 특정 그룹에 가입한 사람 프로필 가져오기
 	List<MemberDto> getGroupMemberImg(int groupId); 

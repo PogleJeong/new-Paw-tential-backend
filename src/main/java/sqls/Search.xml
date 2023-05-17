@@ -6,19 +6,48 @@
 
 	<!-- 피드 검색 목록 -->
 	<select id="searchList" parameterType="mul.cam.a.feed.dto.FeedParam" resultType="map">
-		select a.seq, a.id, a.content, a.location, a.date_created, b.profile, b.nickname
-		from 
-			( select row_number()over(order by seq desc) as rnum,
-			    seq, id, content, location, date_created
-				from feed 
-				where 1=1 
+		SELECT nt.seq,
+         	nt.id,
+            nt.content,
+            nt.location,
+            nt.date_created,
+            nt.FAVORITECOUNT,
+            M.profile,
+            M.nickname,
+            C.COMMENTCOUNT,
+            B.BOOKMARKCOUNT
+		FROM (
+		    SELECT nt.seq,
+		         	nt.id,
+		            nt.content,
+		            nt.location,
+		            nt.date_created,
+		            nt.FAVORITECOUNT,
+		            ROW_NUMBER() OVER (ORDER BY NT.FAVORITECOUNT DESC) AS RNUM
+		    FROM ( SELECT FE.SEQ,
+		                     FE.ID,
+		                            FE.CONTENT,
+		                            FE.LOCATION,
+		                            FE.DATE_CREATED,
+		                     COUNT(FA.FEED_SEQ) AS FAVORITECOUNT
+		            FROM FEED AS FE
+		                  LEFT OUTER JOIN FAVORITES AS FA ON FE.SEQ = FA.FEED_SEQ
+		        where 1=1
 				<if test="search != null and search != ''">
-					and content like concat('%&lt;p&gt;%', #{search}, '%&lt;/p&gt;%')
+					and FE.CONTENT like concat('%&lt;p&gt;%', #{search}, '%&lt;/p&gt;%')
 				</if>
-				order by seq desc
-			) a
-			left join member as b on a.id = b.id
-			where a.rnum between #{start} and #{end}
+		            GROUP BY FE.SEQ, FE.ID, FE.CONTENT, FE.LOCATION, FE.DATE_CREATED
+		            order by FE.SEQ desc
+		    ) AS nt
+		) AS nt LEFT JOIN MEMBER AS M ON NT.ID = M.ID
+		   LEFT OUTER JOIN ( SELECT FEED_SEQ, COUNT(*) AS BOOKMARKCOUNT
+		                        FROM BOOKMARK
+		                        GROUP BY FEED_SEQ
+		                        ) B ON B.FEED_SEQ = NT.SEQ LEFT OUTER JOIN ( SELECT FEED_SEQ, COUNT(*) AS COMMENTCOUNT
+		                                                                              FROM COMMENT
+		                                                                              GROUP BY FEED_SEQ
+		                                                                              ) C ON C.FEED_SEQ = NT.SEQ
+		WHERE NT.RNUM BETWEEN #{start} and #{end};
 	</select>
 	
 	<!-- 피드 검색 결과 총 개수 -->

@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CommentDto {
 
 	private int seq, feedSeq;
-	private String id, comment, profile;
+	private String id, comment, profile, nickname;
 	@DateTimeFormat(pattern = "yy-MM-dd hh:mm")
 	private Date dateCreated, dateUpdated;
 
@@ -15,14 +15,15 @@ public class CommentDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommentDto(int seq, int feedSeq, String id, String comment, String profile, Date dateCreated,
-			Date dateUpdated) {
+	public CommentDto(int seq, int feedSeq, String id, String comment, String profile, String nickname,
+			Date dateCreated, Date dateUpdated) {
 		super();
 		this.seq = seq;
 		this.feedSeq = feedSeq;
 		this.id = id;
 		this.comment = comment;
 		this.profile = profile;
+		this.nickname = nickname;
 		this.dateCreated = dateCreated;
 		this.dateUpdated = dateUpdated;
 	}
@@ -67,6 +68,14 @@ public class CommentDto {
 		this.profile = profile;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -86,8 +95,10 @@ public class CommentDto {
 	@Override
 	public String toString() {
 		return "CommentDto [seq=" + seq + ", feedSeq=" + feedSeq + ", id=" + id + ", comment=" + comment + ", profile="
-				+ profile + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated + "]";
+				+ profile + ", nickname=" + nickname + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
+				+ "]";
 	}
+	
 	
 
 }

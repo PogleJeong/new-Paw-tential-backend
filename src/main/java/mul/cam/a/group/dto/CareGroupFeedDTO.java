@@ -17,6 +17,7 @@ public class CareGroupFeedDTO implements Serializable {
 	private String careGrpFeedWriter;
 	private String careGrpFeedWd;
 	private String profile;
+	private String nickname;
 
 	public CareGroupFeedDTO() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +26,7 @@ public class CareGroupFeedDTO implements Serializable {
 	public CareGroupFeedDTO(int grpNo, int careGrpFeedNo, String careGrpType, String careGrpStartDt,
 			String careGrpEndDt, String careGrpStartTime, String careGrpEndTime, String careGrpCheck,
 			String careGrpContent, String careGrpFeedSetting, String careGrpFeedWriter, String careGrpFeedWd,
-			String profile) {
+			String profile, String nickname) {
 		super();
 		this.grpNo = grpNo;
 		this.careGrpFeedNo = careGrpFeedNo;
@@ -40,6 +41,7 @@ public class CareGroupFeedDTO implements Serializable {
 		this.careGrpFeedWriter = careGrpFeedWriter;
 		this.careGrpFeedWd = careGrpFeedWd;
 		this.profile = profile;
+		this.nickname = nickname;
 	}
 
 	public int getGrpNo() {
@@ -146,6 +148,14 @@ public class CareGroupFeedDTO implements Serializable {
 		this.profile = profile;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
 		return "CareGroupFeedDTO [grpNo=" + grpNo + ", careGrpFeedNo=" + careGrpFeedNo + ", careGrpType=" + careGrpType
@@ -153,7 +163,7 @@ public class CareGroupFeedDTO implements Serializable {
 				+ careGrpStartTime + ", careGrpEndTime=" + careGrpEndTime + ", careGrpCheck=" + careGrpCheck
 				+ ", careGrpContent=" + careGrpContent + ", careGrpFeedSetting=" + careGrpFeedSetting
 				+ ", careGrpFeedWriter=" + careGrpFeedWriter + ", careGrpFeedWd=" + careGrpFeedWd + ", profile="
-				+ profile + "]";
+				+ profile + ", nickname=" + nickname + "]";
 	}
 	
 }
