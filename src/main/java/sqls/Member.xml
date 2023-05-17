@@ -42,7 +42,7 @@
 
 	<insert id="addMember" parameterType="mul.cam.a.member.dto.MemberDto">
 		insert into Member(id, pwd, email, nickname, phone, birth, gender, profile, intro, petHave, status, regiDate, groupId, groupStatus, auth)
-		values(#{id}, #{pwd}, #{email}, #{nickname}, #{phone}, #{birth}, #{gender}, "baseprofile", "안녕하세요!", 0, 0, now(), "", 0, 0)
+		values(#{id}, #{pwd}, #{email}, #{nickname}, #{phone}, #{birth}, #{gender}, "../upload/baseprofile.png", "안녕하세요!", 0, 0, now(), "", 0, 0)
 	</insert>
 	
 	<insert id="addMemberByKakao" parameterType="hashmap">

@@ -18,8 +18,5 @@
 		from pet
 		where id=#{id}
 	</select>
-<<<<<<< HEAD
+
 </mapper>
-=======
-</mapper>
->>>>>>> branch 'master' of https://github.com/PogleJeong/new-Paw-tential-backend.git
